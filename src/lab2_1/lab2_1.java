@@ -6,26 +6,26 @@ import java.util.Scanner;
 
 public class lab2_1 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner skaner = new Scanner(System.in);
 
-        int n = scanner.nextInt(); // сколько будет чисел
+        int kolvo = skaner.nextInt();
 
-        List<Integer> nums = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            nums.add(scanner.nextInt()); // читаем числа по одному
+        List<Integer> chisla = new ArrayList<>();
+        for (int i = 0; i < kolvo; i++) {
+            chisla.add(skaner.nextInt());
         }
 
-        InsertionSort sorter = new InsertionSort(); // создаём объект сортировки
-        sorter.sort(nums);
+        InsertionSort sortirovka = new InsertionSort();
+        sortirovka.sort(chisla);
 
-        // выводим результат через пробел
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < nums.size(); i++) {
+        StringBuilder otvet = new StringBuilder();
+        for (int i = 0; i < chisla.size(); i++) {
+            // пробел перед каждым числом кроме первого
             if (i > 0) {
-                result.append(" "); // пробел только между числами
+                otvet.append(" ");
             }
-            result.append(nums.get(i));
+            otvet.append(chisla.get(i));
         }
-        System.out.println(result);
+        System.out.println(otvet);
     }
 }

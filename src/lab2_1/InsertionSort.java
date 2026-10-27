@@ -4,20 +4,19 @@ import java.util.List;
 
 public class InsertionSort implements Sorting<Integer> {
     @Override
-    public void sort(List<Integer> nums) {
-        // идём слева направо, начиная со второго элемента
-        for (int i = 1; i < nums.size(); i++) {
-            int key = nums.get(i); // запоминаем текущий элемент
-            int j = i - 1;         // индекс элемента слева
+    public void sort(List<Integer> chisla) {
+        for (int i = 1; i < chisla.size(); i++) {
+            int tekushee = chisla.get(i);
+            int j = i - 1;
 
-            // пока слева есть элемент и он больше key, сдвигаем его вправо
-            while (j >= 0 && nums.get(j) > key) {
-                nums.set(j + 1, nums.get(j));
+
+            while (j >= 0 && chisla.get(j) > tekushee) { // сдвигаем большие элементы вправо
+                chisla.set(j + 1, chisla.get(j));
                 j--;
             }
 
-            // ставим key на своё место
-            nums.set(j + 1, key);
+
+            chisla.set(j + 1, tekushee);// вст в освободивш место
         }
     }
 }
