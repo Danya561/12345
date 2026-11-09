@@ -4,52 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MergeSort implements Sorting<Integer> {
-    private void slice(List<Integer> spisok, int nachalo, int konec) {
-
-        if (nachalo >= konec) { // один элемент или меньше тикаем
+    private void slice(List<Integer> nums, int start, int end) {
+        if (start >= end) {
             return;
         }
-        int seredina = (nachalo + konec) / 2;
-        slice(spisok, nachalo, seredina);
-        slice(spisok, seredina + 1, konec);
-        merge(spisok, nachalo, seredina, konec);
+        int middle = (start + end) / 2;
+        slice(nums, start, middle);
+        slice(nums, middle + 1, end);
+        merge(nums, start, middle, end);
     }
 
-    private void merge(List<Integer> spisok, int nachalo, int seredina, int konec) {
-        // во временный, чтобы не затереть числа
-        List<Integer> vremenny = new ArrayList<>();
-        int i = nachalo;
-        int j = seredina + 1;
+    private void merge(List<Integer> nums, int start, int middle, int end) {
+        List<Integer> left = new ArrayList<>();
+        for (int x = start; x <= middle; x++) {
+            left.add(nums.get(x));
+        }
 
-        while (i <= seredina && j <= konec) {
+        List<Integer> right = new ArrayList<>();
+        for (int x = middle + 1; x <= end; x++) {
+            right.add(nums.get(x));
+        }
 
-            if (spisok.get(i) <= spisok.get(j)) { // чтобы одинаковые не менялись местами
-                vremenny.add(spisok.get(i));
+        int i = 0;
+        int j = 0;
+        int k = start;
+
+        while (i < left.size() && j < right.size()) {
+            if (left.get(i) <= right.get(j)) {
+                nums.set(k, left.get(i));
                 i++;
             } else {
-                vremenny.add(spisok.get(j));
+                nums.set(k, right.get(j));
                 j++;
             }
+            k++;
         }
 
-        while (i <= seredina) {
-            vremenny.add(spisok.get(i));
+        while (i < left.size()) {
+            nums.set(k, left.get(i));
             i++;
+            k++;
         }
 
-        while (j <= konec) {
-            vremenny.add(spisok.get(j));
+        while (j < right.size()) {
+            nums.set(k, right.get(j));
             j++;
-        }
-
-
-        for (int k = 0; k < vremenny.size(); k++) { // врем с нуля, а кусок с начала
-            spisok.set(nachalo + k, vremenny.get(k));
+            k++;
         }
     }
 
     @Override
-    public void sort(List<Integer> spisok) {
-        slice(spisok, 0, spisok.size() - 1);
+    public void sort(List<Integer> nums) {
+        slice(nums, 0, nums.size() - 1);
     }
 }

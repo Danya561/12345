@@ -1,29 +1,26 @@
 package lab2_2;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner skaner = new Scanner(System.in);
-        int kolvo = skaner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
 
-        List<Integer> spisok = new ArrayList<>();
-        for (int i = 0; i < kolvo; i++) {
-            spisok.add(skaner.nextInt());
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            nums.add(scanner.nextInt());
         }
 
-        Sorting<Integer> sortirovka = new MergeSort();
-        sortirovka.sort(spisok);
-
-        StringBuilder otvet = new StringBuilder();
-        for (int i = 0; i < spisok.size(); i++) {
-            otvet.append(spisok.get(i));
-            if (i < spisok.size() - 1) {
-                otvet.append(" ");
+        new MergeSort().sort(nums);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nums.size(); i++) {
+            if (i > 0) {
+                sb.append(' ');
             }
+            sb.append(nums.get(i));
         }
-        System.out.println(otvet);
+        System.out.println(sb);
     }
 }
