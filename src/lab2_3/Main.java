@@ -5,26 +5,33 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        Scanner skaner = new Scanner(System.in);
 
-        int kolichestvo = skaner.nextInt();
+        Scanner scanner = new Scanner(System.in);
 
-        List<Student> studenty = new ArrayList<>();
-        for (int i = 0; i < kolichestvo; i++) {
-            String imya = skaner.next();
-            int vozrast = skaner.nextInt();
-            studenty.add(new Student(imya, vozrast));
+        int n = scanner.nextInt();
+
+        List<Student> students = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+
+            String name = scanner.next();
+            int age = scanner.nextInt();
+
+            students.add(new Student(name, age));
         }
 
-        StudentSort sortirovshik = new StudentSort();
-        sortirovshik.sort(studenty);
+        StudentSort sorting = new StudentSort();
 
-        // StringBuilder nuzhen, chtoby vyvod 100000 strok byl bystrym
-        StringBuilder stroka = new StringBuilder();
-        for (Student student : studenty) {
-            stroka.append(student.getName()).append(" ").append(student.getAge()).append("\n");
+        sorting.sort(students);
+
+        for (Student student : students) {
+            System.out.println(
+                    student.getName() + " " + student.getAge()
+            );
         }
-        System.out.print(stroka);
+
+        scanner.close();
     }
 }
